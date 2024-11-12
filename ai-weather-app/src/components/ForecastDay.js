@@ -1,7 +1,7 @@
 // src/components/ForecastDay.js
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
-import FormatDate from "./FormatDate";
+
 
 const ForecastDay = ({ data }) => {
   function maxTemperature() {
