@@ -1,5 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { WiDaySunny, WiCloudy, WiRain } from 'react-icons/wi';
+
+const WeatherIcon = ({ description }) => {
+  switch (description) {
+    case 'clear sky':
+      return <WiDaySunny />;
+    case 'cloudy':
+      return <WiCloudy />;
+    case 'rain':
+      return <WiRain />;
+    default:
+      return <WiDaySunny />;
+  }
+};
 
 const Weather = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -54,7 +68,7 @@ const Weather = ({ defaultCity }) => {
         <div className="weather-card">
           <h2>{weatherData.city}</h2>
           <div className="weather-info">
-            <img src={`http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`} alt={weatherData.description} />
+            <WeatherIcon description={weatherData.description} />
             <div>
               <p>{weatherData.temperature}°F</p>
               <p>{weatherData.description}</p>

@@ -26,15 +26,15 @@ exports.handler = async (event) => {
       messages: [
         {
           role: "system",
-          content: "You are a weather expert. Provide detailed weather insights."
+          content: "You are a weather expert. Provide concise weather insights in one sentence."
         },
         {
           role: "user",
           content: `Describe the weather in ${location} with a temperature of ${temperature}°F and conditions described as ${description}.`
         }
       ],
-      max_tokens: 150,
-      temperature: 0.7,
+      max_tokens: 50,
+      temperature: 1,
     });
 
     const aiInsight = completion.choices[0].message.content;
