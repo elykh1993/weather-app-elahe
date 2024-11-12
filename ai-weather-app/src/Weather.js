@@ -27,8 +27,7 @@ const Weather = ({ defaultCity }) => {
   };
 
   const search = useCallback(() => {
-    const apiKey = process.env.OPEN_WEATHER_API_KEY;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+    const url = `/.netlify/functions/getWeather?location=${city}`;
     axios.get(url).then(showTemperature);
   }, [city]);
 
