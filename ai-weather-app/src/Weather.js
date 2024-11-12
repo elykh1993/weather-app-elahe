@@ -14,7 +14,16 @@ const Weather = ({ defaultCity }) => {
     console.log('API response:', response);
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
-    const forecast = response.data.forecast.slice(0, 5);
+    const forecast = response.data.forecast;
+
+    console.log('Forecast data:', response.data.forecast);
+
+    // Filter to get one forecast per day
+    const dailyForecast = forecast.filter((item, index, self) =>
+      index === self.findIndex((t) => (
+        new Date(t.dt * 1000).getDate() === new Date(item.dt * 1000).getDate()
+      ))
+    );
 
     setWeatherData({
       ready: true,
@@ -32,7 +41,7 @@ const Weather = ({ defaultCity }) => {
       aiInsight: aiInsight,
     });
 
-    setWeeklyForecast(forecast);
+    setWeeklyForecast(dailyForecast.slice(0, 5)); // Limit to 5 days
   };
 
   const search = useCallback(() => {
