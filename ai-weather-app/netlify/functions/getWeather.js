@@ -30,7 +30,7 @@ exports.handler = async (event) => {
       messages: [
         {
           role: "system",
-          content: "You are a weather expert. Provide concise weather insights in 1-2 sentences Use the prompt as context."
+          content: "You are a weather expert. Provide very concise weather insights in 1 sentence."
         },
         {
           role: "user",

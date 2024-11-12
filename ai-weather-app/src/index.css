@@ -67,11 +67,62 @@ button:hover {
   font-weight: 700;
   color: #333;
 }
+.main-weather-info .description {
+  font-size: 16px;
+  color: #555;
+  font-weight: normal;
+}
 
 .weather-info img {
   width: 80px;
   height: 80px;
 }
+
+h3 {
+  display: block; /* Ensures it's a block element */
+  margin-top: 20px; /* Adds space above */
+  margin-bottom: 10px; /* Adds space below */
+  font-size: 24px; /* Adjusts the font size */
+  font-weight: bold; /* Makes the text bold */
+  color: #333; /* Sets the text color */
+}
+
+/* Main weather info styling */
+.main-weather-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333; /* Dark text for readability */
+}
+
+.main-weather-info h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Dark color for the city name */
+  margin: 0;
+}
+
+/* Styling for temperature and description */
+.main-weather-info .temp {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1e1e1e; /* Slightly darker for emphasis */
+  margin: 0;
+}
+
+
+.main-weather-info .icon {
+  width: 60px;
+  height: 60px;
+}
+
+
+.weekly-forecast-header {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 
 
 /* AI Insight box styling */
@@ -122,62 +173,4 @@ button:hover {
     grid-template-columns: 1fr;
     text-align: center;
   }
-}
-
-h3 {
-  display: block; /* Ensures it's a block element */
-  margin-top: 20px; /* Adds space above */
-  margin-bottom: 10px; /* Adds space below */
-  font-size: 24px; /* Adjusts the font size */
-  font-weight: bold; /* Makes the text bold */
-  color: #333; /* Sets the text color */
-}
-
-/* Main weather info styling */
-.main-weather-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  font-family: 'Segoe UI', sans-serif;
-  color: #333; /* Dark text for readability */
-}
-
-.main-weather-info h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333; /* Dark color for the city name */
-  margin: 0;
-}
-
-/* Styling for temperature and description */
-.main-weather-info .temp {
-  font-size: 48px;
-  font-weight: bold;
-  color: #1e1e1e; /* Slightly darker for emphasis */
-  margin: 0;
-}
-
-.main-weather-info .description {
-  font-size: 16px;
-  color: #555;
-  font-weight: normal;
-}
-
-.main-weather-info .icon {
-  width: 60px;
-  height: 60px;
-}
-
-.weekly-forecast h3 {
-  display: block; /* Ensures it's a block element */
-  margin-top: 20px; /* Adds space above */
-  margin-bottom: 10px; /* Adds space below */
-  font-size: 24px; /* Adjusts the font size */
-  font-weight: bold; /* Makes the text bold */
-  color: #333; /* Sets the text color */
-}
-
-.weekly-forecast-header {
-  margin-top: 20px;
-  margin-bottom: 10px;
 }
