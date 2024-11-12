@@ -11,7 +11,7 @@ const Weather = ({ defaultCity }) => {
     console.log('API response:', response);
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
-    const forecast = response.data.forecast;
+    const forecast = response.data.forecast.slice(0, 5);
 
     setWeatherData({
       ready: true,
@@ -107,10 +107,10 @@ const Weather = ({ defaultCity }) => {
             {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
               weeklyForecast.map((day, index) => (
                 <div key={index} className="forecast-day">
-                  <p>{day.day}</p>
-                  <p>High: {day.high}°F</p>
-                  <p>Low: {day.low}°F</p>
-                  {getWeatherIcon(day.description)}
+                  <p>{new Date(day.dt * 1000).toLocaleDateString()}</p>
+                  <p>High: {day.main.temp_max}°F</p>
+                  <p>Low: {day.main.temp_min}°F</p>
+                  {getWeatherIcon(day.weather[0].description)}
                 </div>
               ))
             ) : (
