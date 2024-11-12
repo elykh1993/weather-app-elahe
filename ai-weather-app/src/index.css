@@ -103,14 +103,14 @@ h3 {
 }
 
 /* Styling for temperature and description */
-.main-weather-info .temp {
-  font-size: 49px;
+.weather-card .temp {
+  font-size: 48px;
   font-weight: bold;
   color: #1e1e1e;
   margin: 0;
 }
 
-.main-weather-info .description {
+.weather-card .description {
   font-size: 16px;
   color: #555;
   font-weight: normal;
@@ -174,12 +174,15 @@ h3 {
     grid-template-columns: 1fr;
     text-align: center;
   }
+
+  .weekly-forecast .days {
+    grid-template-columns: 1fr;
+  }
 }
 
 .footer {
   text-align: center;
   padding: 20px;
-  background-color: #f0f4f8;
   color: #333;
   border-top: 1px solid #ddd;
 }
