@@ -95,8 +95,8 @@ const Weather = ({ defaultCity }) => {
           <div className="weather-info">
             <div className="main-weather-info">
             <WeatherIcon description={weatherData.description} /> {/* Main weather icon */}</div>
-              <p>{weatherData.temperature}°F</p>
-              <p>{weatherData.description}</p>
+              <div><p>{weatherData.temperature}°F</p>
+              <p>{weatherData.description}</p></div>
 
           </div>
           <div className="ai-insight">
@@ -104,7 +104,7 @@ const Weather = ({ defaultCity }) => {
             <p>{weatherData.aiInsight}</p>
           </div>
           <div className="weekly-forecast">
-            <h3>Weekly Forecast</h3>
+            <div><h3>Weekly Forecast</h3></div>
              {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
                 weeklyForecast.map((day, index) => (
                   <ForecastDay key={index} data={day} />
