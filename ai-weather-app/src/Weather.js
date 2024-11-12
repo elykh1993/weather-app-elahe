@@ -1,47 +1,62 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Weather = () => {
-  const [location, setLocation] = useState('Seattle');
-  const [weather, setWeather] = useState(null);
+const Weather = ({ defaultCity }) => {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(defaultCity);
 
-  const fetchWeather = useCallback(async () => {
-    try {
-      console.log('Fetching weather for:', location);
-      const response = await axios.get(`/.netlify/functions/getWeather?location=${location}`);
-      console.log('Weather data received:', response.data);
-      setWeather(response.data);
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-    }
-  }, [location]);
+  const showTemperature = (response) => {
+    setWeatherData({
+      ready: true,
+      coordinates: response.data.coord,
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      city: response.data.name,
+      description: response.data.weather[0].description,
+      wind: response.data.wind.speed,
+      icon: response.data.weather[0].icon,
+      date: new Date(response.data.dt * 1000),
+    });
+  };
+
+  const search = () => {
+    const apiKey = 'YOUR_API_KEY';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+    axios.get(url).then(showTemperature);
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    search();
+  };
+
+  const updateCity = (event) => {
+    setCity(event.target.value);
+  };
 
   useEffect(() => {
-    fetchWeather();
-  }, [fetchWeather]);
+    search();
+  }, []);
 
-  return (
-    <div className="weather-app">
-      <input
-        type="text"
-        placeholder="Enter location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      />
-      <button onClick={fetchWeather}>Search</button>
-      {weather && weather.main && weather.weather && (
+  if (weatherData.ready) {
+    return (
+      <div>
+        <form onSubmit={handleSearch}>
+          <input type="text" value={city} onChange={updateCity} placeholder="Enter a city..." />
+          <button type="submit">Search</button>
+        </form>
         <div>
-          <h2>{weather.name}</h2>
-          <p>{Math.round(weather.main.temp)}°F</p>
-          <p>{weather.weather[0].description}</p>
-          <div>
-            <h3>AI Weather Insight</h3>
-            <p>{weather.aiInsight}</p>
-          </div>
+          <h2>{weatherData.city}</h2>
+          <p>{weatherData.temperature}°F</p>
+          <p>{weatherData.description}</p>
+          <p>Humidity: {weatherData.humidity}%</p>
+          <p>Wind: {weatherData.wind} mph</p>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return "Loading...";
+  }
 };
 
 export default Weather;
