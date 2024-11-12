@@ -95,13 +95,15 @@ button:hover {
 /* Weekly forecast styling - single row on desktop, stacked on mobile */
 .weekly-forecast {
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
   background-color: #ffffff;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.weekly-forecast .days {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
 }
 
 .forecast-day {
@@ -179,4 +181,9 @@ h3 {
   font-size: 24px; /* Adjusts the font size */
   font-weight: bold; /* Makes the text bold */
   color: #333; /* Sets the text color */
+}
+
+.weekly-forecast-header {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
