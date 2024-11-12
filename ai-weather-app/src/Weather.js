@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 
 const Weather = ({ defaultCity }) => {
@@ -33,6 +33,7 @@ const Weather = ({ defaultCity }) => {
   };
 
   const search = useCallback(() => {
+    console.log('Search function is called');
     const url = `/.netlify/functions/getWeather?location=${city}`;
     axios.get(url)
       .then(showTemperature)
@@ -41,6 +42,10 @@ const Weather = ({ defaultCity }) => {
         console.error('API call error:', error);
       });
   }, [city]);
+
+  useEffect(() => {
+    search();
+  }, [search]);
 
   const handleSearch = (event) => {
     event.preventDefault();
