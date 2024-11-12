@@ -5,32 +5,6 @@ const Weather = ({ defaultCity = 'Seattle' }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [forecastData, setForecastData] = useState([]);
   const [city, setCity] = useState(defaultCity);
-  const [debouncedCity, setDebouncedCity] = useState(defaultCity);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedCity(city);
-    }, 500); // 500ms delay
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [city]);
-
-  useEffect(() => {
-    if (!debouncedCity) return;
-
-    const search = () => {
-      const apiKey = 'YOUR_API_KEY';
-      const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${debouncedCity}&units=imperial&appid=${apiKey}`;
-      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${debouncedCity}&cnt=5&units=imperial&appid=${apiKey}`;
-
-      axios.get(weatherUrl).then(showTemperature).catch(console.error);
-      axios.get(forecastUrl).then(showForecast).catch(console.error);
-    };
-
-    search();
-  }, [debouncedCity]);
 
   const showTemperature = (response) => {
     const weather = response.data.weather;
@@ -57,13 +31,29 @@ const Weather = ({ defaultCity = 'Seattle' }) => {
     setForecastData(response.data.daily.slice(0, 5)); // Get 5-day forecast
   };
 
+  const search = () => {
+    if (!city) return; // Prevent search if city is empty
+
+    const apiKey = 'YOUR_API_KEY';
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&units=imperial&appid=${apiKey}`;
+
+    axios.get(weatherUrl).then(showTemperature).catch(console.error);
+    axios.get(forecastUrl).then(showForecast).catch(console.error);
+  };
+
   const handleSearch = (event) => {
     event.preventDefault();
+    search();
   };
 
   const updateCity = (event) => {
     setCity(event.target.value);
   };
+
+  useEffect(() => {
+    search();
+  }, []);
 
   if (weatherData.ready) {
     return (
