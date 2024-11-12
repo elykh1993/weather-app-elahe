@@ -19,11 +19,16 @@ const Weather = ({ defaultCity }) => {
     console.log('Forecast data:', response.data.forecast);
 
     // Filter to get one forecast per day
-    const dailyForecast = forecast.filter((item, index, self) =>
-      index === self.findIndex((t) => (
-        new Date(t.dt * 1000).getDate() === new Date(item.dt * 1000).getDate()
-      ))
-    );
+    const dailyForecast = forecast.filter((item, index, self) => {
+      const itemDate = new Date(item.dt * 1000);
+      const today = new Date();
+      return (
+        itemDate.getDate() !== today.getDate() &&
+        index === self.findIndex((t) => (
+          new Date(t.dt * 1000).getDate() === itemDate.getDate()
+        ))
+      );
+    });
 
     setWeatherData({
       ready: true,
@@ -100,13 +105,15 @@ const Weather = ({ defaultCity }) => {
           </div>
           <div className="weekly-forecast">
             <h3>Weekly Forecast</h3>
-            {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
-              weeklyForecast.map((day, index) => (
-                <ForecastDay key={index} data={day} />
-              ))
-            ) : (
-              <p>No forecast data available.</p>
-            )}
+            <div>
+              {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
+                weeklyForecast.map((day, index) => (
+                  <ForecastDay key={index} data={day} />
+                ))
+              ) : (
+                <p>No forecast data available.</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
