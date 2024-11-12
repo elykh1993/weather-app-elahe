@@ -17,11 +17,16 @@ const ForecastDay = ({ data }) => {
     return date.toLocaleDateString('en-US', { weekday: 'short' });
   }
 
+  function titleCaseDescription(description) {
+    return description.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  }
+
   return (
     <div className="forecast-day">
       <p>{formattedDate()}</p>
       <WeatherIcon description={data.weather[0].description} />
       <p>{maxTemperature()} | {minTemperature()}</p>
+      <p>{titleCaseDescription(data.weather[0].description)}</p>
     </div>
   );
 };
