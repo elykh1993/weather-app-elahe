@@ -30,11 +30,11 @@ exports.handler = async (event) => {
       messages: [
         {
           role: "system",
-          content: "You are a weather expert. Provide concise weather insights in one sentence."
+          content: "You are a weather expert. Provide concise weather insights in 1-2 sentences Use the prompt as context."
         },
         {
           role: "user",
-          content: `Location: ${location}. Current temperature: ${temperature}°F. Weather conditions: ${description}. Humidity: ${currentWeather.main.humidity}%. Wind speed: ${currentWeather.wind.speed} mph.`
+          content: `Location: ${location}. Current temperature: ${temperature}°F, feels like: ${Math.round(currentWeather.main.feels_like)}°F. Weather conditions: ${description}. Humidity: ${currentWeather.main.humidity}%. Wind speed: ${currentWeather.wind.speed} mph. Consider dressing warmly if the feels-like temperature is low. This week, expect varying conditions with highs around ${Math.round(currentWeather.main.temp_max)}°F and lows around ${Math.round(currentWeather.main.temp_min)}°F.`
         }
       ],
       max_tokens: 50,
