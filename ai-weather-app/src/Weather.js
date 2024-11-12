@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Weather = ({ defaultCity = 'Seattle' }) => {
+const Weather = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
-  const [forecastData, setForecastData] = useState([]);
   const [city, setCity] = useState(defaultCity);
 
   const showTemperature = (response) => {
@@ -27,19 +26,10 @@ const Weather = ({ defaultCity = 'Seattle' }) => {
     });
   };
 
-  const showForecast = (response) => {
-    setForecastData(response.data.daily.slice(0, 5)); // Get 5-day forecast
-  };
-
   const search = () => {
-    if (!city) return; // Prevent search if city is empty
-
     const apiKey = 'YOUR_API_KEY';
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&units=imperial&appid=${apiKey}`;
-
-    axios.get(weatherUrl).then(showTemperature).catch(console.error);
-    axios.get(forecastUrl).then(showForecast).catch(console.error);
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+    axios.get(url).then(showTemperature);
   };
 
   const handleSearch = (event) => {
@@ -77,13 +67,31 @@ const Weather = ({ defaultCity = 'Seattle' }) => {
           </div>
           <div className="weekly-forecast">
             <h3>Weekly Forecast</h3>
-            {forecastData.map((day, index) => (
-              <div key={index} className="forecast-day">
-                <p>{new Date(day.dt * 1000).toLocaleDateString('en-US', { weekday: 'short' })}</p>
-                <p>High: {day.temp.max}°F</p>
-                <p>Low: {day.temp.min}°F</p>
-              </div>
-            ))}
+            <div className="forecast-day">
+              <p>Mon</p>
+              <p>High: 72°F</p>
+              <p>Low: 60°F</p>
+            </div>
+            <div className="forecast-day">
+              <p>Tue</p>
+              <p>High: 68°F</p>
+              <p>Low: 55°F</p>
+            </div>
+            <div className="forecast-day">
+              <p>Wed</p>
+              <p>High: 75°F</p>
+              <p>Low: 58°F</p>
+            </div>
+            <div className="forecast-day">
+              <p>Thu</p>
+              <p>High: 70°F</p>
+              <p>Low: 57°F</p>
+            </div>
+            <div className="forecast-day">
+              <p>Fri</p>
+              <p>High: 73°F</p>
+              <p>Low: 59°F</p>
+            </div>
           </div>
         </div>
       </div>
