@@ -8,17 +8,21 @@ exports.handler = async (event) => {
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${weatherApiKey}`;
-
   try {
-    // Fetch weather data
-    const weatherResponse = await axios.get(weatherUrl);
-    const weatherData = weatherResponse.data;
+    // Fetch latitude and longitude using Geocoding API
+    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${weatherApiKey}`;
+    const geoResponse = await axios.get(geoUrl);
+    const { lat, lon } = geoResponse.data[0];
 
-    // Extract relevant weather details
-    const { main, weather } = weatherData;
-    const temperature = Math.round(main.temp);
-    const description = weather[0].description;
+    // Fetch 5-day weather forecast using latitude and longitude
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
+    const forecastResponse = await axios.get(forecastUrl);
+    const forecastData = forecastResponse.data;
+
+    // Extract relevant weather details for the current weather
+    const currentWeather = forecastData.list[0];
+    const temperature = Math.round(currentWeather.main.temp);
+    const description = currentWeather.weather[0].description;
 
     // Generate AI insights
     const completion = await openai.chat.completions.create({
@@ -42,7 +46,8 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        weather: weatherData,
+        weather: currentWeather,
+        forecast: forecastData.list,
         aiInsight: aiInsight
       }),
     };
