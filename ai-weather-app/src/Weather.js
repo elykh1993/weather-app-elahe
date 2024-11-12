@@ -57,7 +57,7 @@ const Weather = ({ defaultCity }) => {
   };
 
   const getWeatherIcon = (description) => {
-    const basePath = "/public/128x128/";
+    const basePath = "/128x128/";
     const descriptionToIconMap = {
       "light rain": "chancerain.png",
       "mist": "hazy.png",

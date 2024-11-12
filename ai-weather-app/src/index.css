@@ -1,3 +1,4 @@
+/* General styling */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,75 +8,99 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* Main weather app container */
 .weather-app {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  background: white;
+  max-width: 350px;
+  margin: 40px auto;
   padding: 20px;
+  background-color: #f0f4f8;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-input {
+/* Search bar styling */
+form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
   padding: 10px;
-  width: 80%;
-  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 0 15px;
+  background-color: #333;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #222;
+}
+
+/* Main weather card styling */
+.weather-card {
+  text-align: center;
+  color: #333;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px; /* Larger font for temperature */
+  font-weight: 700;
+  color: #333;
+}
+
+.weather-info img {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+}
+
+/* AI Insight box styling */
+.ai-insight {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Weekly forecast styling */
+.weekly-forecast {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-day {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.forecast-day img {
+  width: 24px;
+  height: 24px;
 }
