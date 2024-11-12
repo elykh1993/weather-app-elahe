@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
-import ForecastDay from "./ForecastDay";
+import ForecastDay from "./components/ForecastDay.js";
 
 const Weather = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });

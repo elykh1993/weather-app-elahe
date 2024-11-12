@@ -1,4 +1,4 @@
-// ForecastDay.js
+// src/components/ForecastDay.js
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
 
@@ -22,7 +22,7 @@ const ForecastDay = ({ data }) => {
   return (
     <div className="forecast-day">
       <p>{day()}</p>
-      <WeatherIcon code={data.weather[0].icon} />
+      <WeatherIcon description={data.weather[0].description} />
       <p>High: {maxTemperature()}</p>
       <p>Low: {minTemperature()}</p>
     </div>
