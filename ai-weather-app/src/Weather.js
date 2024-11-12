@@ -5,10 +5,12 @@ const Weather = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(defaultCity);
   const [error, setError] = useState(null);
+  const [weeklyForecast, setWeeklyForecast] = useState([]);
 
   const showTemperature = (response) => {
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
+    const forecast = response.data.forecast;
 
     setWeatherData({
       ready: true,
@@ -25,6 +27,8 @@ const Weather = ({ defaultCity }) => {
       date: new Date(weather.dt * 1000),
       aiInsight: aiInsight,
     });
+
+    setWeeklyForecast(forecast);
   };
 
   const search = useCallback(() => {
@@ -114,7 +118,7 @@ const Weather = ({ defaultCity }) => {
             <div>
               <p>{weatherData.temperature}°F</p>
               <p>{weatherData.description}</p>
-              <img src={getWeatherIcon(weatherData.icon)} alt="weather icon" />
+              {getWeatherIcon(weatherData.icon)}
             </div>
           </div>
           <div className="ai-insight">
@@ -123,31 +127,14 @@ const Weather = ({ defaultCity }) => {
           </div>
           <div className="weekly-forecast">
             <h3>Weekly Forecast</h3>
-            <div className="forecast-day">
-              <p>Mon</p>
-              <p>High: 72°F</p>
-              <p>Low: 60°F</p>
-            </div>
-            <div className="forecast-day">
-              <p>Tue</p>
-              <p>High: 68°F</p>
-              <p>Low: 55°F</p>
-            </div>
-            <div className="forecast-day">
-              <p>Wed</p>
-              <p>High: 75°F</p>
-              <p>Low: 58°F</p>
-            </div>
-            <div className="forecast-day">
-              <p>Thu</p>
-              <p>High: 70°F</p>
-              <p>Low: 57°F</p>
-            </div>
-            <div className="forecast-day">
-              <p>Fri</p>
-              <p>High: 73°F</p>
-              <p>Low: 59°F</p>
-            </div>
+            {weeklyForecast.map((day, index) => (
+              <div key={index} className="forecast-day">
+                <p>{day.day}</p>
+                <p>High: {day.high}°F</p>
+                <p>Low: {day.low}°F</p>
+                {getWeatherIcon(day.icon)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
