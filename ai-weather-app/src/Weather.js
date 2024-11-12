@@ -10,6 +10,10 @@ const Weather = ({ defaultCity }) => {
   const [error, setError] = useState(null);
   const [weeklyForecast, setWeeklyForecast] = useState([]);
 
+  const titleCaseDescription = (description) => {
+    return description.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
   const showTemperature = (response) => {
     console.log('API response:', response);
     const weather = response.data.weather;
@@ -39,7 +43,7 @@ const Weather = ({ defaultCity }) => {
       tempMax: weather.main.temp_max,
       humidity: weather.main.humidity,
       city: weather.name,
-      description: weather.weather[0].description,
+      description: titleCaseDescription(weather.weather[0].description),
       wind: weather.wind.speed,
       icon: weather.weather[0].icon,
       date: new Date(weather.dt * 1000),
@@ -96,7 +100,12 @@ const Weather = ({ defaultCity }) => {
             <div className="main-weather-info">
             <WeatherIcon description={weatherData.description} /> {/* Main weather icon */}</div>
               <div><p className="temp">{weatherData.temperature}°F</p>
-              <p className="description">{weatherData.description}</p></div>
+              <p className="description">
+                {titleCaseDescription(weatherData.description)}<br />
+                High: {Math.round(weatherData.tempMax)}°F | Low: {Math.round(weatherData.tempMin)}°F<br />
+                Feels Like: {Math.round(weatherData.feelsLike)}°F<br />
+                Wind: {Math.round(weatherData.wind)} mph
+              </p></div>
 
           </div>
           <div className="ai-insight">

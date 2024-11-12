@@ -34,7 +34,7 @@ exports.handler = async (event) => {
         },
         {
           role: "user",
-          content: `Location: ${location}. Current temperature: ${temperature}°F, feels like: ${Math.round(currentWeather.main.feels_like)}°F. Weather conditions: ${description}. Humidity: ${currentWeather.main.humidity}%. Wind speed: ${currentWeather.wind.speed} mph. Consider dressing warmly if the feels-like temperature is low. This week, expect varying conditions with highs around ${Math.round(currentWeather.main.temp_max)}°F and lows around ${Math.round(currentWeather.main.temp_min)}°F.`
+          content: `Location: ${location}. Current temperature: ${temperature}°F, feels like: ${Math.round(currentWeather.main.feels_like)}°F. Weather conditions: ${description}. Humidity: ${currentWeather.main.humidity}%. Wind speed: ${currentWeather.wind.speed} mph. This week, expect varying conditions with highs around ${Math.round(currentWeather.main.temp_max)}°F.`
         }
       ],
       max_tokens: 50,
