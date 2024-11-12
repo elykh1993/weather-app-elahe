@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Weather = ({ defaultCity }) => {
+const Weather = ({ defaultCity = 'Seattle' }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [forecastData, setForecastData] = useState([]);
   const [city, setCity] = useState(defaultCity);
@@ -32,12 +32,14 @@ const Weather = ({ defaultCity }) => {
   };
 
   const search = () => {
+    if (!city) return; // Prevent search if city is empty
+
     const apiKey = 'YOUR_API_KEY';
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&units=imperial&appid=${apiKey}`;
 
-    axios.get(weatherUrl).then(showTemperature);
-    axios.get(forecastUrl).then(showForecast);
+    axios.get(weatherUrl).then(showTemperature).catch(console.error);
+    axios.get(forecastUrl).then(showForecast).catch(console.error);
   };
 
   const handleSearch = (event) => {
