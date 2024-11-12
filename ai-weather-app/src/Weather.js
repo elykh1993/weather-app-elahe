@@ -10,9 +10,9 @@ const Weather = ({ defaultCity }) => {
   const [error, setError] = useState(null);
   const [weeklyForecast, setWeeklyForecast] = useState([]);
 
-  const titleCaseDescription = (description) => {
+  const titleCaseDescription = useCallback((description) => {
     return description.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-  };
+  }, []);
 
   const showTemperature = useCallback((response) => {
     console.log('API response:', response);
