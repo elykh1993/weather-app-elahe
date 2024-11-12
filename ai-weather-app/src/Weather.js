@@ -78,6 +78,12 @@ const Weather = ({ defaultCity }) => {
     return <img src={`${basePath}${iconFileName}`} alt={description} />;
   };
 
+  const getDayName = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return days[date.getDay()];
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -107,7 +113,7 @@ const Weather = ({ defaultCity }) => {
             {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
               weeklyForecast.map((day, index) => (
                 <div key={index} className="forecast-day">
-                  <p>{new Date(day.dt * 1000).toLocaleDateString()}</p>
+                  <p>{getDayName(day.dt)}</p>
                   <p>High: {day.main.temp_max}°F</p>
                   <p>Low: {day.main.temp_min}°F</p>
                   {getWeatherIcon(day.weather[0].description)}
