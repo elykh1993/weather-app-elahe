@@ -52,28 +52,31 @@ button:hover {
 
 /* Main weather card styling */
 .weather-card {
-  text-align: center;
+  text-align: left;
   color: #333;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* Two-column layout for main weather info */
 .weather-info {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  font-size: 36px;
+  gap: 10px;
+  font-size: 48px;
   font-weight: 700;
   color: #333;
 }
 
-.weather-info div {
-  text-align: left;
+.weather-info img {
+  width: 80px;
+  height: 80px;
 }
 
-.weather-info img {
-  width: 60px;
-  height: 60px;
+.weather-info p {
+  margin: 0;
+  font-size: 24px;
+  color: #555;
 }
 
 /* AI Insight box styling */
@@ -166,4 +169,13 @@ h3 {
 .main-weather-info .icon {
   width: 60px;
   height: 60px;
+}
+
+.weekly-forecast h3 {
+  display: block; /* Ensures it's a block element */
+  margin-top: 20px; /* Adds space above */
+  margin-bottom: 10px; /* Adds space below */
+  font-size: 24px; /* Adjusts the font size */
+  font-weight: bold; /* Makes the text bold */
+  color: #333; /* Sets the text color */
 }
