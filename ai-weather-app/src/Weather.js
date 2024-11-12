@@ -74,7 +74,7 @@ const Weather = ({ defaultCity }) => {
       // Add more mappings as needed
     };
 
-    const iconFileName = descriptionToIconMap[description.toLowerCase()] || "default.png";
+    const iconFileName = descriptionToIconMap[description.toLowerCase()] || "clear.png";
     return <img src={`${basePath}${iconFileName}`} alt={description} />;
   };
 
