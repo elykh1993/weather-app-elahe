@@ -41,10 +41,6 @@ const Weather = ({ defaultCity }) => {
       });
   }, [city]);
 
-  useEffect(() => {
-    search();
-  }, [search]);
-
   const handleSearch = (event) => {
     event.preventDefault();
     search();
