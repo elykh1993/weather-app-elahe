@@ -8,6 +8,7 @@ const Weather = ({ defaultCity }) => {
   const [weeklyForecast, setWeeklyForecast] = useState([]);
 
   const showTemperature = (response) => {
+    console.log('API response:', response);
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
     const forecast = response.data.forecast;
@@ -37,7 +38,7 @@ const Weather = ({ defaultCity }) => {
       .then(showTemperature)
       .catch((error) => {
         setError('Failed to fetch weather data');
-        console.error(error);
+        console.error('API call error:', error);
       });
   }, [city]);
 
