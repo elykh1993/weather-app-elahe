@@ -57,20 +57,20 @@ const Weather = ({ defaultCity }) => {
   };
 
   const getWeatherIcon = (description) => {
-    const basePath = "/128x128/";
+    const basePath = "/public/128x128/";
     const descriptionToIconMap = {
-      "light rain": "light-rain.png",
-      "mist": "mist.png",
-      "drizzle": "drizzle.png",
-      "clear sky": "clear-sky.png",
-      "few clouds": "few-clouds.png",
-      "scattered clouds": "scattered-clouds.png",
-      "broken clouds": "broken-clouds.png",
-      "shower rain": "shower-rain.png",
-      "rain": "rain.png",
-      "thunderstorm": "thunderstorm.png",
-      "snow": "snow.png",
-      "fog": "fog.png",
+      "light rain": "chancerain.png",
+      "mist": "hazy.png",
+      "drizzle": "rain.png",
+      "clear sky": "clear.png",
+      "few clouds": "cloudy.png",
+      "scattered clouds": "mostlycloudy.png",
+      "broken clouds": "partlycloudy.png",
+      "shower rain": "nt_rain.png",
+      "rain": "nt_rain.png",
+      "thunderstorm": "nt_tstorms.png",
+      "snow": "nt_snow.png",
+      "fog": "nt_fog.png",
       // Add more mappings as needed
     };
 
