@@ -132,3 +132,38 @@ h3 {
   font-weight: bold; /* Makes the text bold */
   color: #333; /* Sets the text color */
 }
+
+/* Main weather info styling */
+.main-weather-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333; /* Dark text for readability */
+}
+
+.main-weather-info h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Dark color for the city name */
+  margin: 0;
+}
+
+/* Styling for temperature and description */
+.main-weather-info .temperature {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1e1e1e; /* Slightly darker for emphasis */
+  margin: 0;
+}
+
+.main-weather-info .description {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+.main-weather-info .icon {
+  width: 60px;
+  height: 60px;
+}
