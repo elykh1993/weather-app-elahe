@@ -63,7 +63,7 @@ const Weather = ({ defaultCity }) => {
           console.error('API call error:', error);
         });
     }
-  }, [city]);
+  }, [city, showTemperature]);
 
   useEffect(() => {
     search();
