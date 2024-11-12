@@ -1,15 +1,17 @@
-import React, { useState, useCallback, useEffect } from "react";
-import axios from "axios";
-import ForecastDay from "./components/ForecastDay.js";
+import React, { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
+import WeatherIcon from "./components/WeatherIcon"; // Ensure the path is correct
+import ForecastDay from "./components/ForecastDay"; // Ensure the path is correct
 
 const Weather = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(defaultCity);
+  const [searchInput, setSearchInput] = useState(defaultCity); // Separate state for input
   const [error, setError] = useState(null);
   const [weeklyForecast, setWeeklyForecast] = useState([]);
 
   const showTemperature = (response) => {
-    console.log("API response:", response);
+    console.log('API response:', response);
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
     const forecast = response.data.forecast.slice(0, 5);
@@ -34,14 +36,15 @@ const Weather = ({ defaultCity }) => {
   };
 
   const search = useCallback(() => {
-    const url = `/.netlify/functions/getWeather?location=${city}`;
-    axios
-      .get(url)
-      .then(showTemperature)
-      .catch((error) => {
-        setError("Failed to fetch weather data");
-        console.error("API call error:", error);
-      });
+    if (city) {
+      const url = `/.netlify/functions/getWeather?location=${city}`;
+      axios.get(url)
+        .then(showTemperature)
+        .catch((error) => {
+          setError('Failed to fetch weather data');
+          console.error('API call error:', error);
+        });
+    }
   }, [city]);
 
   useEffect(() => {
@@ -50,11 +53,11 @@ const Weather = ({ defaultCity }) => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    search();
+    setCity(searchInput); // Set the actual search city only on submit
   };
 
-  const updateCity = (event) => {
-    setCity(event.target.value);
+  const updateSearchInput = (event) => {
+    setSearchInput(event.target.value); // Update the local input state
   };
 
   if (error) {
@@ -67,8 +70,8 @@ const Weather = ({ defaultCity }) => {
         <form onSubmit={handleSearch}>
           <input
             type="text"
-            value={city}
-            onChange={updateCity}
+            value={searchInput}
+            onChange={updateSearchInput} // Update searchInput only, not city
             placeholder="Enter location"
           />
           <button type="submit">Search</button>
@@ -77,6 +80,7 @@ const Weather = ({ defaultCity }) => {
           <h2>{weatherData.city}</h2>
           <div className="weather-info">
             <div>
+            <WeatherIcon description={weatherData.description} /> {/* Main weather icon */}
               <p>{weatherData.temperature}°F</p>
               <p>{weatherData.description}</p>
             </div>
