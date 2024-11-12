@@ -14,7 +14,7 @@ const Weather = ({ defaultCity }) => {
     return description.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
   };
 
-  const showTemperature = (response) => {
+  const showTemperature = useCallback((response) => {
     console.log('API response:', response);
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
@@ -51,7 +51,7 @@ const Weather = ({ defaultCity }) => {
     });
 
     setWeeklyForecast(dailyForecast.slice(0, 5)); // Limit to 5 days
-  };
+  }, [titleCaseDescription]);
 
   const search = useCallback(() => {
     if (city) {
