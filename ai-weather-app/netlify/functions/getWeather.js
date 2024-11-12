@@ -34,7 +34,7 @@ exports.handler = async (event) => {
         },
         {
           role: "user",
-          content: `Describe the weather in ${location} with a temperature of ${temperature}°F and conditions described as ${description}.`
+          content: `Location: ${location}. Current temperature: ${temperature}°F. Weather conditions: ${description}. Humidity: ${currentWeather.main.humidity}%. Wind speed: ${currentWeather.wind.speed} mph.`
         }
       ],
       max_tokens: 50,

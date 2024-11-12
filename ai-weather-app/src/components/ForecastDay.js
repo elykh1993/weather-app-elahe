@@ -4,12 +4,10 @@ import WeatherIcon from "./WeatherIcon";
 
 const ForecastDay = ({ data }) => {
   function maxTemperature() {
-    // Access temp_max directly from data.main
     return `${Math.round(data.main.temp_max)}°F`;
   }
 
   function minTemperature() {
-    // Access temp_min directly from data.main
     return `${Math.round(data.main.temp_min)}°F`;
   }
 
