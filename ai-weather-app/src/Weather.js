@@ -96,7 +96,7 @@ const Weather = ({ defaultCity }) => {
             <div className="main-weather-info">
             <WeatherIcon description={weatherData.description} /> {/* Main weather icon */}</div>
               <div><p>{weatherData.temperature}°F</p>
-              <p>{weatherData.description}</p></div>
+              <p className="description">{weatherData.description}</p></div>
 
           </div>
           <div className="ai-insight">
