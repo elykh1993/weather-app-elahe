@@ -5,7 +5,7 @@ import FormatDate from "./FormatDate";
 
 const ForecastDay = ({ data }) => {
   function maxTemperature() {
-    return `${Math.round(data.main.temp_max)}°F`;
+    return <strong>{Math.round(data.main.temp_max)}°F</strong>;
   }
 
   function minTemperature() {
@@ -13,15 +13,15 @@ const ForecastDay = ({ data }) => {
   }
 
   function formattedDate() {
-    return <FormatDate date={new Date(data.dt * 1000)} />;
+    const date = new Date(data.dt * 1000);
+    return date.toLocaleDateString('en-US', { weekday: 'short' });
   }
 
   return (
     <div className="forecast-day">
       <p>{formattedDate()}</p>
       <WeatherIcon description={data.weather[0].description} />
-      <p>High: {maxTemperature()}</p>
-      <p>Low: {minTemperature()}</p>
+      <p>{maxTemperature()} | {minTemperature()}</p>
     </div>
   );
 };
