@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const Weather = ({ defaultCity }) => {
@@ -26,11 +26,15 @@ const Weather = ({ defaultCity }) => {
     });
   };
 
-  const search = () => {
+  const search = useCallback(() => {
     const apiKey = 'YOUR_API_KEY';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
     axios.get(url).then(showTemperature);
-  };
+  }, [city]);
+
+  useEffect(() => {
+    search();
+  }, [search]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -40,10 +44,6 @@ const Weather = ({ defaultCity }) => {
   const updateCity = (event) => {
     setCity(event.target.value);
   };
-
-  useEffect(() => {
-    search();
-  }, []);
 
   if (weatherData.ready) {
     return (
