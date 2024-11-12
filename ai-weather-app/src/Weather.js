@@ -7,7 +7,9 @@ const Weather = () => {
 
   const fetchWeather = useCallback(async () => {
     try {
+      console.log('Fetching weather for:', location);
       const response = await axios.get(`/.netlify/functions/getWeather?location=${location}`);
+      console.log('Weather data received:', response.data);
       setWeather(response.data);
     } catch (error) {
       console.error('Error fetching weather data:', error);
