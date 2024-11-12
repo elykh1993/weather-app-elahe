@@ -56,51 +56,26 @@ const Weather = ({ defaultCity }) => {
     setCity(event.target.value);
   };
 
-  const getWeatherIcon = (iconCode) => {
-    const baseClass = "wu wu-white wu-64";
-    switch (iconCode) {
-      case 'chanceflurries':
-        return <i className={`${baseClass} wu-chanceflurries`}></i>;
-      case 'chancerain':
-        return <i className={`${baseClass} wu-chancerain`}></i>;
-      case 'chancesleet':
-        return <i className={`${baseClass} wu-chancesleet`}></i>;
-      case 'chancesnow':
-        return <i className={`${baseClass} wu-chancesnow`}></i>;
-      case 'chancetstorms':
-        return <i className={`${baseClass} wu-chancetstorms`}></i>;
-      case 'clear':
-        return <i className={`${baseClass} wu-clear`}></i>;
-      case 'cloudy':
-        return <i className={`${baseClass} wu-cloudy`}></i>;
-      case 'flurries':
-        return <i className={`${baseClass} wu-flurries`}></i>;
-      case 'fog':
-        return <i className={`${baseClass} wu-fog`}></i>;
-      case 'hazy':
-        return <i className={`${baseClass} wu-hazy`}></i>;
-      case 'mostlycloudy':
-        return <i className={`${baseClass} wu-mostlycloudy`}></i>;
-      case 'mostlysunny':
-        return <i className={`${baseClass} wu-mostlysunny`}></i>;
-      case 'partlycloudy':
-        return <i className={`${baseClass} wu-partlycloudy`}></i>;
-      case 'partlysunny':
-        return <i className={`${baseClass} wu-partlysunny`}></i>;
-      case 'rain':
-        return <i className={`${baseClass} wu-rain`}></i>;
-      case 'sleet':
-        return <i className={`${baseClass} wu-sleet`}></i>;
-      case 'snow':
-        return <i className={`${baseClass} wu-snow`}></i>;
-      case 'sunny':
-        return <i className={`${baseClass} wu-sunny`}></i>;
-      case 'tstorms':
-        return <i className={`${baseClass} wu-tstorms`}></i>;
-      case 'unknown':
-      default:
-        return <i className={`${baseClass} wu-unknown`}></i>; // Default icon
-    }
+  const getWeatherIcon = (description) => {
+    const basePath = "/128x128/";
+    const descriptionToIconMap = {
+      "light rain": "light-rain.png",
+      "mist": "mist.png",
+      "drizzle": "drizzle.png",
+      "clear sky": "clear-sky.png",
+      "few clouds": "few-clouds.png",
+      "scattered clouds": "scattered-clouds.png",
+      "broken clouds": "broken-clouds.png",
+      "shower rain": "shower-rain.png",
+      "rain": "rain.png",
+      "thunderstorm": "thunderstorm.png",
+      "snow": "snow.png",
+      "fog": "fog.png",
+      // Add more mappings as needed
+    };
+
+    const iconFileName = descriptionToIconMap[description.toLowerCase()] || "default.png";
+    return <img src={`${basePath}${iconFileName}`} alt={description} />;
   };
 
   if (error) {
@@ -120,7 +95,7 @@ const Weather = ({ defaultCity }) => {
             <div>
               <p>{weatherData.temperature}°F</p>
               <p>{weatherData.description}</p>
-              {getWeatherIcon(weatherData.icon)}
+              {getWeatherIcon(weatherData.description)}
             </div>
           </div>
           <div className="ai-insight">
@@ -135,7 +110,7 @@ const Weather = ({ defaultCity }) => {
                   <p>{day.day}</p>
                   <p>High: {day.high}°F</p>
                   <p>Low: {day.low}°F</p>
-                  {getWeatherIcon(day.icon)}
+                  {getWeatherIcon(day.description)}
                 </div>
               ))
             ) : (
