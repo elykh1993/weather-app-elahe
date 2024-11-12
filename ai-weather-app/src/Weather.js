@@ -33,7 +33,7 @@ const Weather = ({ defaultCity }) => {
     setWeatherData({
       ready: true,
       coordinates: weather.coord,
-      temperature: weather.main.temp,
+      temperature: Math.round(weather.main.temp),
       feelsLike: weather.main.feels_like,
       tempMin: weather.main.temp_min,
       tempMax: weather.main.temp_max,
@@ -95,7 +95,7 @@ const Weather = ({ defaultCity }) => {
           <div className="weather-info">
             <div className="main-weather-info">
             <WeatherIcon description={weatherData.description} /> {/* Main weather icon */}</div>
-              <div><p className="temperature">{weatherData.temperature}°F</p>
+              <div><p className="temp">{weatherData.temperature}°F</p>
               <p className="description">{weatherData.description}</p></div>
 
           </div>
