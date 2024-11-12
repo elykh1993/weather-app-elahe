@@ -123,14 +123,18 @@ const Weather = ({ defaultCity }) => {
           </div>
           <div className="weekly-forecast">
             <h3>Weekly Forecast</h3>
-            {weeklyForecast.map((day, index) => (
-              <div key={index} className="forecast-day">
-                <p>{day.day}</p>
-                <p>High: {day.high}°F</p>
-                <p>Low: {day.low}°F</p>
-                {getWeatherIcon(day.icon)}
-              </div>
-            ))}
+            {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
+              weeklyForecast.map((day, index) => (
+                <div key={index} className="forecast-day">
+                  <p>{day.day}</p>
+                  <p>High: {day.high}°F</p>
+                  <p>Low: {day.low}°F</p>
+                  {getWeatherIcon(day.icon)}
+                </div>
+              ))
+            ) : (
+              <p>No forecast data available.</p>
+            )}
           </div>
         </div>
       </div>
