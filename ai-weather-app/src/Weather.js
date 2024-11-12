@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useCallback, useEffect } from "react";
+import axios from "axios";
+import ForecastDay from "./ForecastDay";
 
 const Weather = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -8,7 +9,7 @@ const Weather = ({ defaultCity }) => {
   const [weeklyForecast, setWeeklyForecast] = useState([]);
 
   const showTemperature = (response) => {
-    console.log('API response:', response);
+    console.log("API response:", response);
     const weather = response.data.weather;
     const aiInsight = response.data.aiInsight;
     const forecast = response.data.forecast.slice(0, 5);
@@ -33,13 +34,13 @@ const Weather = ({ defaultCity }) => {
   };
 
   const search = useCallback(() => {
-    console.log('Search function is called');
     const url = `/.netlify/functions/getWeather?location=${city}`;
-    axios.get(url)
+    axios
+      .get(url)
       .then(showTemperature)
       .catch((error) => {
-        setError('Failed to fetch weather data');
-        console.error('API call error:', error);
+        setError("Failed to fetch weather data");
+        console.error("API call error:", error);
       });
   }, [city]);
 
@@ -56,34 +57,6 @@ const Weather = ({ defaultCity }) => {
     setCity(event.target.value);
   };
 
-  const getWeatherIcon = (description) => {
-    const basePath = "/128x128/";
-    const descriptionToIconMap = {
-      "light rain": "chancerain.png",
-      "mist": "hazy.png",
-      "drizzle": "rain.png",
-      "clear sky": "clear.png",
-      "few clouds": "cloudy.png",
-      "scattered clouds": "mostlycloudy.png",
-      "broken clouds": "partlycloudy.png",
-      "shower rain": "nt_rain.png",
-      "rain": "nt_rain.png",
-      "thunderstorm": "nt_tstorms.png",
-      "snow": "nt_snow.png",
-      "fog": "nt_fog.png",
-      // Add more mappings as needed
-    };
-
-    const iconFileName = descriptionToIconMap[description.toLowerCase()] || "clear.png";
-    return <img src={`${basePath}${iconFileName}`} alt={description} />;
-  };
-
-  const getDayName = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    return days[date.getDay()];
-  };
-
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -92,7 +65,12 @@ const Weather = ({ defaultCity }) => {
     return (
       <div className="weather-app">
         <form onSubmit={handleSearch}>
-          <input type="text" value={city} onChange={updateCity} placeholder="Enter location" />
+          <input
+            type="text"
+            value={city}
+            onChange={updateCity}
+            placeholder="Enter location"
+          />
           <button type="submit">Search</button>
         </form>
         <div className="weather-card">
@@ -101,7 +79,6 @@ const Weather = ({ defaultCity }) => {
             <div>
               <p>{weatherData.temperature}°F</p>
               <p>{weatherData.description}</p>
-              {getWeatherIcon(weatherData.description)}
             </div>
           </div>
           <div className="ai-insight">
@@ -112,12 +89,7 @@ const Weather = ({ defaultCity }) => {
             <h3>Weekly Forecast</h3>
             {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
               weeklyForecast.map((day, index) => (
-                <div key={index} className="forecast-day">
-                  <p>{getDayName(day.dt)}</p>
-                  <p>High: {day.main.temp_max}°F</p>
-                  <p>Low: {day.main.temp_min}°F</p>
-                  {getWeatherIcon(day.weather[0].description)}
-                </div>
+                <ForecastDay key={index} data={day} />
               ))
             ) : (
               <p>No forecast data available.</p>
