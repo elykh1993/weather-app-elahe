@@ -105,14 +105,14 @@ const Weather = ({ defaultCity }) => {
           </div>
           <div className="weekly-forecast">
             <h3>Weekly Forecast</h3>
-             <p>{Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
+             {Array.isArray(weeklyForecast) && weeklyForecast.length > 0 ? (
                 weeklyForecast.map((day, index) => (
                   <ForecastDay key={index} data={day} />
                 ))
               ) : (
                 <p>No forecast data available.</p>
               )}
-            </p>
+            
           </div>
         </div>
       </div>

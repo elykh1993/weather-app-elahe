@@ -123,3 +123,12 @@ button:hover {
     text-align: center;
   }
 }
+
+h3 {
+  display: block; /* Ensures it's a block element */
+  margin-top: 20px; /* Adds space above */
+  margin-bottom: 10px; /* Adds space below */
+  font-size: 24px; /* Adjusts the font size */
+  font-weight: bold; /* Makes the text bold */
+  color: #333; /* Sets the text color */
+}
