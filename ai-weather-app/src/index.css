@@ -73,12 +73,6 @@ button:hover {
   height: 80px;
 }
 
-.weather-info p {
-  margin: 0;
-  font-size: 16px;
-  color: #555;
-  font-weight: normal;
-}
 
 /* AI Insight box styling */
 .ai-insight {
@@ -156,7 +150,7 @@ h3 {
 }
 
 /* Styling for temperature and description */
-.main-weather-info .temperature {
+.main-weather-info .temp {
   font-size: 48px;
   font-weight: bold;
   color: #1e1e1e; /* Slightly darker for emphasis */
