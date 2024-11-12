@@ -15,7 +15,7 @@ body {
 
 /* Main weather app container */
 .weather-app {
-  max-width: 650px;
+  max-width: 750px;
   margin: 40px auto;
   padding: 20px;
   background-color: #f0f4f8;
@@ -53,9 +53,6 @@ button:hover {
 /* Main weather card styling */
 .weather-card {
   text-align: left;
-  color: #333;
-  font-size: 18px;
-  font-weight: bold;
 }
 
 /* Two-column layout for main weather info */
@@ -107,25 +104,27 @@ h3 {
 
 /* Styling for temperature and description */
 .main-weather-info .temp {
-  font-size: 48px;
+  font-size: 49px;
   font-weight: bold;
-  color: #1e1e1e; /* Slightly darker for emphasis */
+  color: #1e1e1e;
   margin: 0;
 }
 
+.main-weather-info .description {
+  font-size: 16px;
+  color: #555;
+  font-weight: normal;
+}
 
 .main-weather-info .icon {
   width: 60px;
   height: 60px;
 }
 
-
 .weekly-forecast-header {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-
-
 
 /* AI Insight box styling */
 .ai-insight {
@@ -175,4 +174,26 @@ h3 {
     grid-template-columns: 1fr;
     text-align: center;
   }
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f4f8;
+  color: #333;
+  border-top: 1px solid #ddd;
+}
+
+.footer-links {
+  margin-top: 10px;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  color: #555;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }
