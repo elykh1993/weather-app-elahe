@@ -8,10 +8,6 @@ const ForecastDay = ({ data }) => {
     return <strong>{Math.round(data.main.temp_max)}°F</strong>;
   }
 
-  function minTemperature() {
-    return `${Math.round(data.main.temp_min)}°F`;
-  }
-
   function formattedDate() {
     const date = new Date(data.dt * 1000);
     return date.toLocaleDateString('en-US', { weekday: 'short' });
@@ -25,7 +21,7 @@ const ForecastDay = ({ data }) => {
     <div className="forecast-day">
       <p>{formattedDate()}</p>
       <WeatherIcon description={data.weather[0].description} />
-      <p>{maxTemperature()} | {minTemperature()}</p>
+      <p>{maxTemperature()}</p>
       <p>{titleCaseDescription(data.weather[0].description)}</p>
     </div>
   );
