@@ -37,7 +37,7 @@ exports.handler = async (event) => {
           content: `Location: ${location}. Current temperature: ${temperature}°F, feels like: ${Math.round(currentWeather.main.feels_like)}°F. Weather conditions: ${description}. Humidity: ${currentWeather.main.humidity}%. Wind speed: ${currentWeather.wind.speed} mph. This week, expect varying conditions.`
         }
       ],
-      max_tokens: 50,
+      max_tokens: 75,
       temperature: 1,
     });
 
