@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <ErrorBoundary>
-        <Weather defaultCity="Seattle" />
+        <Weather defaultCity="Tehran" />
       </ErrorBoundary>
     </div>
   );
